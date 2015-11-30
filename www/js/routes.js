@@ -26,7 +26,12 @@ angular.module('app.routes', [])
     .state('eventPage', {
       url: '/events/:eventID',
       templateUrl: 'templates/eventPage.html',
-      controller: 'eventPageCtrl'
+      controller: 'eventPageCtrl',
+      resolve: {
+        eventID: function($stateParams, EventsService) {
+          return EventsService.getEvent($stateParams.eventID); 
+        }
+      }
     })
       
         

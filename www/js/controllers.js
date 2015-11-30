@@ -69,7 +69,7 @@ angular.module('app.controllers', ['ionic'])
    
 .controller('eventPageCtrl', function($scope, EventService) {
   
-  $scope.curEvent;
+  //$scope.curEvent = EventsService.getEvent($scope.id);
   $scope.preferences;
   //$scope.preferences.push("hi");
   
