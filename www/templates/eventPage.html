@@ -1,0 +1,25 @@
+<ion-view title="Event Page">
+    <ion-nav-buttons side="right">
+      <button class="right button button-icon ion-plus" ></button>
+<!--      ng-click="newEvent()"-->
+    </ion-nav-buttons>
+    <ion-content padding="true" class="has-header">
+        <h1>Event name</h1>
+        <div>
+            <p>Some friendly
+                <strong>markdown</strong>Event description and other stuff. lol.</p>
+        </div>
+        <ion-list>
+            <ion-item>Item 1</ion-item>
+            <ion-item>Item 2</ion-item>
+            <ion-item>Item 3</ion-item>
+            <ion-item ng-repeat="preference in preferences">
+              <h2>{{preference.name}}</h2>
+              <p>{{preference.creator}}</p>
+            </ion-item>
+        </ion-list>
+        <button href="#/tabs/events">Finished </button>
+        <button href="#">finishe2</button>
+      <a href="#/tabs/events">link</a>
+    </ion-content>
+</ion-view>

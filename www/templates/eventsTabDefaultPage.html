@@ -1,0 +1,45 @@
+<ion-view title="Events Tab Default Page">
+    <ion-nav-buttons side="right">
+      <button class="right button button-icon ion-plus" ng-click="newEvent()"></button>
+    </ion-nav-buttons>
+    <ion-content padding="true" class="has-header">
+      
+        <!-- List of Events -->
+        <ion-list>
+            <ion-item>Item 1</ion-item>
+            <ion-item>Item 2</ion-item>
+            <ion-item ng-repeat="event in events" href="#/events/{{events.name}}">
+              <h2>{{event.name}}</h2>
+              <p>{{event.creator}}</p>
+            </ion-item>
+        </ion-list>
+        
+      
+        <script id="new-event.html" type="text/ng-template">
+          <div class="modal">
+            
+            <ion-header-bar class="bar-secondary">
+              <h1 class="title">New Event</h1>
+              <button class="button button-clear button-positive" ng-click="closeNewEvent()">Cancel</button>
+            </ion-header-bar>
+            
+            <ion-content>
+              
+              <!-- submit form to create new Event -->
+              <form ng-submit="createEvent(event)">
+                <div class="list">
+                  <label class="item item-input">
+                    <input type="text" ng-model="event.name" placeholder="Name">
+                  </label>
+                  <label class="item item-input">
+                    <input type="text" ng-model="event.creator" placeholder="Creator">
+                  </label>
+                  <button type="submit" class="button button-block button-positive">Create Event</button>
+                </div>
+              </form>
+            </ion-content>
+          </div>
+        </script>
+      
+    </ion-content>
+</ion-view>
