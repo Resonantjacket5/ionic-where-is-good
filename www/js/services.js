@@ -39,7 +39,8 @@ angular.module('app.services', [])
   
   //array of events that user attains
   var o = {
-   events: []
+    events: [],
+    lastID: 0
   };
   
   o.events.push(
@@ -50,15 +51,38 @@ angular.module('app.services', [])
     }
   );
   
+  o.makeEvent = function(name,creator){
+    var tempEvent={
+      name:name,
+      creator:creator,
+      id:(o.lastID+1)
+    };
+    o.lastID+=1;
+    return tempEvent;
+  };
+  
+  
   o.getEvents = function () {
     
     return o.events;
   };
   
-  o.addEvent = function (event) {
+  o.getEvent = function(eventID) {
+    for ( event in o.events)
+    {
+      if(event.id === eventID)
+      {
+        return event;
+      }
+    }
+    console.log("event not found");
+  };
+  
+  o.addEvent = function (eventInfo) {
     console.log("added event");
     //probably should have a event constructor, don't directly call 
     // upon the add the created event from controller
+    var event  = o.makeEvent(eventInfo.name,eventInfo.creator);
     o.events.push(event);
   };
   

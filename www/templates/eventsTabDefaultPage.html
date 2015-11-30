@@ -8,9 +8,13 @@
         <ion-list>
             <ion-item>Item 1</ion-item>
             <ion-item>Item 2</ion-item>
-            <ion-item ng-repeat="event in events" href="#/events/{{events.name}}">
-              <h2>{{event.name}}</h2>
-              <p>{{event.creator}}</p>
+            <ion-item ng-repeat="event in events" href="#/events/{{events.id}}">
+              <div class="text-left">
+                <h2>{{event.name}}</h2>
+                <p>{{event.creator}}</p>
+              </div>
+              
+              <p>Event - {{event.id}}</p>
             </ion-item>
         </ion-list>
         
