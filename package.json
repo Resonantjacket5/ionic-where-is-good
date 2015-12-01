@@ -1,7 +1,7 @@
 {
-  "name": "trial2",
+  "name": "WhereIsGood",
   "version": "1.1.1",
-  "description": "trial2: An Ionic project",
+  "description": "WhereIsGood: An Ionic project",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",

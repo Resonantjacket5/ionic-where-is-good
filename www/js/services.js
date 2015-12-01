@@ -17,6 +17,11 @@ angular.module('app.services', [])
     preferences: []
   };
   
+  o.preferences.push({
+    time: 50,
+    money: 0
+    
+  });
   
   o.getPreferences = function () {
     
@@ -50,6 +55,13 @@ angular.module('app.services', [])
       id:0
     }
   );
+  o.events.push(
+    {  
+      name:"event 7",
+      creator:"sam",
+      id:7 
+    }
+  );
   
   o.makeEvent = function(name,creator){
     var tempEvent={
@@ -68,13 +80,18 @@ angular.module('app.services', [])
   };
   
   o.getEvent = function(eventID) {
-    for ( event in o.events)
-    {
-      if(event.id === eventID)
-      {
+    
+//    console.log("array size "+o.events.length);
+//    console.log("eventid "+eventID);
+    
+    for (var index = 0; index<(o.events.length); index+=1)
+    {  
+      var event = o.events[index];
+      if(event.id == eventID)
+      {  
         return event;
-      }
-    }
+      } 
+    } 
     console.log("event not found");
   };
   

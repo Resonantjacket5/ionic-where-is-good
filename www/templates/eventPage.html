@@ -4,23 +4,57 @@
 <!--      ng-click="newEvent()"-->
     </ion-nav-buttons>
     <ion-content padding="true" class="has-header">
-        <p>{{event.name}}k</p>
-        <h1>Event name</h1>
+        <h1>{{curEvent.name}}</h1>
+        <p>Creator: {{curEvent.creator}}</p>
         <div>
             <p>Some friendly
-                <strong>markdown</strong>Event description and other stuff. lol.</p>
+                <strong>markdown</strong> Event description and other stuff. lol.</p>
         </div>
         <ion-list>
+            {{eventID}}
             <ion-item>Item 1</ion-item>
             <ion-item>Item 2</ion-item>
-            <ion-item>Item 3</ion-item>
             <ion-item ng-repeat="preference in preferences">
-              <h2>{{preference.name}}</h2>
-              <p>{{preference.creator}}</p>
+              <h2>{{preference.money}}</h2>
+              <p>{{preference.time}}</p>
             </ion-item>
         </ion-list>
         <button href="#/tabs/events">Finished </button>
         <button href="#">finishe2</button>
       <a href="#/tabs/events">link</a>
+      
+      <script id="new-preference.html" type="text/ng-template">
+          <div class="modal">
+            
+            <ion-header-bar class="bar-secondary">
+              <h1 class="title">New Preference</h1>
+              <button class="button button-clear button-positive" ng-click="closeNewPreference()">Cancel</button>
+            </ion-header-bar>
+            
+            <ion-content>
+              
+              <!-- submit form to create new Event -->
+              <form ng-submit="createPreference(preference)">
+                <div class="list">
+                  <label class="item item-input">
+                    <!--Should automatically attain from current user name(id)-->
+                    <input type="text" ng-model="preference.owner" placeholder="Owner">
+                  </label>
+                  <label class="item item-input">
+                    <input type="number" ng-model="preference.money" placeholder="none">
+                  </label>
+                  <label class="item item-input">
+                    <input type="number" ng-model="preference.money" placeholder="none">
+                  </label>
+                  <label class="item item-input">
+                    <!--later implement automatic ask for location-->
+                    <input type="text" ng-model="event.location" placeholder="Location">
+                  </label>
+                  <button type="submit" class="button button-block button-positive">Create Event</button>
+                </div>
+              </form>
+            </ion-content>
+          </div>
+        </script>
     </ion-content>
 </ion-view>

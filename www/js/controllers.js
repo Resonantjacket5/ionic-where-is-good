@@ -67,9 +67,12 @@ angular.module('app.controllers', ['ionic'])
 
 })
    
-.controller('eventPageCtrl', function($scope, EventService) {
+.controller('eventPageCtrl', function($stateParams, $scope, EventService, EventsService) {
   
-  //$scope.curEvent = EventsService.getEvent($scope.id);
+  //passes in string of eventID
+  $scope.curEvent = EventsService.getEvent($stateParams.eventID);
+  console.log("event page"); 
+  console.log($scope.curEvent.name);
   $scope.preferences;
   //$scope.preferences.push("hi");
   
