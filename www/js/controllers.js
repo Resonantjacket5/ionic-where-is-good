@@ -17,28 +17,11 @@ angular.module('app.controllers', ['ionic'])
     console.log("hi");
   };
   
-  $scope.createEvent = function(event) {
-//    $scope.events.push({
-//      "name": "bob",
-//      "creator": "fake"
-//    });
-    
-    console.log("controller create event");
-    console.log(event.name);
 
-
-    EventsService.addEvent(angular.copy(event));
-    
-    //erase name and creator fields
-    event.name ="";
-    event.creator ="";
-    $scope.closeNewEvent();
-
-  };
   
-  $scope.createTask = function(task) {
-    console.log(task.title); 
-  }
+//  $scope.createTask = function(task) {
+//    console.log(task.title); 
+//  }
   
   
   $scope.newEvent = function() {
@@ -50,7 +33,15 @@ angular.module('app.controllers', ['ionic'])
     $scope.eventModal.hide();
   };
   
-  
+  $scope.createEvent = function(event) {
+    EventsService.addEvent(angular.copy(event));
+    
+    //erase name and creator fields
+    event.name ="";
+    event.creator ="";
+    $scope.closeNewEvent();
+
+  };
   
   
 })
@@ -67,14 +58,53 @@ angular.module('app.controllers', ['ionic'])
 
 })
    
-.controller('eventPageCtrl', function($stateParams, $scope, EventService, EventsService) {
+.controller('eventPageCtrl', function($stateParams, $ionicModal, $scope, EventService, EventsService) {
+  
+  
+  
   
   //passes in string of eventID
   $scope.curEvent = EventsService.getEvent($stateParams.eventID);
+  
+  //debugging
   console.log("event page"); 
   console.log($scope.curEvent.name);
-  $scope.preferences;
-  //$scope.preferences.push("hi");
+  
+  
+  EventService.loadPrefernces($scope.curEvent.preferences);
+  console.log("reload preferences");
+  $scope.preferences = EventService.getPreferences();
+  
+  
+  $ionicModal.fromTemplateUrl('new-preference.html',function(modal){
+    $scope.preferenceModal = modal; 
+  }, {
+    scope: $scope,
+    animation: 'slide-in-up'
+  });
+  
+  $scope.newPreference = function () {
+    console.log("open new preference");
+    $scope.preferenceModal.show();
+  };
+  
+  $scope.closeNewPreference = function () {
+    console.log("close new preference");
+    $scope.preferenceModal.hide();
+  };
+  
+  // send in object holding preference parameters
+  $scope.createPreference = function(p_preference) {
+    EventService.addPreference(angular.copy(p_preference));
+    
+    //erase name and creator fields
+    p_preference.owner ="";
+    p_preference.distance = 0;
+    p_preference.money = 0;
+    $scope.closeNewPreference();
+
+  };
+  
   
 });
  

@@ -1,6 +1,6 @@
 <ion-view title="Event">
     <ion-nav-buttons side="right">
-      <button class="right button button-icon ion-plus" ></button>
+      <button class="right button button-icon ion-plus" ng-click="newPreference()"></button>
 <!--      ng-click="newEvent()"-->
     </ion-nav-buttons>
     <ion-content padding="true" class="has-header">
@@ -33,7 +33,7 @@
             
             <ion-content>
               
-              <!-- submit form to create new Event -->
+              <!-- submit form to create new Preference -->
               <form ng-submit="createPreference(preference)">
                 <div class="list">
                   <label class="item item-input">
@@ -41,14 +41,10 @@
                     <input type="text" ng-model="preference.owner" placeholder="Owner">
                   </label>
                   <label class="item item-input">
-                    <input type="number" ng-model="preference.money" placeholder="none">
+                    <input type="number" ng-model="preference.distance" placeholder="Distance">
                   </label>
                   <label class="item item-input">
-                    <input type="number" ng-model="preference.money" placeholder="none">
-                  </label>
-                  <label class="item item-input">
-                    <!--later implement automatic ask for location-->
-                    <input type="text" ng-model="event.location" placeholder="Location">
+                    <input type="number" ng-model="preference.money" placeholder="Money">
                   </label>
                   <button type="submit" class="button button-block button-positive">Create Event</button>
                 </div>

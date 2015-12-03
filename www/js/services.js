@@ -13,11 +13,19 @@ angular.module('app.services', [])
 
 .factory('EventService', [function(){
   var o ={
+    //pointer to current event
+    
+    
     //array of preferences that event holds
     preferences: []
   };
   
+  o.loadPrefernces = function(preferences){
+    o.preferences=preferences;
+  };
+  
   o.preferences.push({
+    owner: "hydrogen",
     time: 50,
     money: 0
     
@@ -52,14 +60,16 @@ angular.module('app.services', [])
     {  
       name:"event 4b",
       creator:"Jackson",
-      id:0
+      id:0,
+      preferences: []
     }
   );
   o.events.push(
     {  
       name:"event 7",
       creator:"sam",
-      id:7 
+      id:7,
+      preferences:[]
     }
   );
   
@@ -67,7 +77,8 @@ angular.module('app.services', [])
     var tempEvent={
       name:name,
       creator:creator,
-      id:(o.lastID+1)
+      id:(o.lastID+1),
+      preferences:[]
     };
     o.lastID+=1;
     return tempEvent;
