@@ -1,8 +1,14 @@
 <ion-view title="Event">
-    <ion-nav-buttons side="right">
+<!--
+  <ion-nav-buttons side="left">
+    <button class="button">hi</button>
+    <ion-nav-back-button class="button-icon icon ion-ios-arrow-back">Back</ion-nav-back-button>
+  </ion-nav-buttons>  
+-->
+  <ion-nav-buttons side="right">
       <button class="right button button-icon ion-plus" ng-click="newPreference()"></button>
 <!--      ng-click="newEvent()"-->
-    </ion-nav-buttons>
+  </ion-nav-buttons>
     <ion-content padding="true" class="has-header">
         <h1>{{curEvent.name}}</h1>
         <p>Creator: {{curEvent.creator}}</p>

@@ -14,7 +14,7 @@ angular.module('app.services', [])
 .factory('EventService', [function(){
   var o ={
     //pointer to current event
-    
+    curEvent:null,
     
     //array of preferences that event holds
     preferences: []

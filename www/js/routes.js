@@ -11,28 +11,29 @@ angular.module('app.routes', [])
       
         
     .state('tabsController.eventsTabDefaultPage', {
-//      abstract: true,
-      //url: '/page4',
       url: '/events',
       views: {
-        'tab4': {
+        'eventsTab': {
           templateUrl: 'templates/eventsTabDefaultPage.html',
           controller: 'eventsTabDefaultPageCtrl'
         }
       }
     })
-        
-      
-    .state('eventPage', {
+    .state('tabsController.eventPage', {
       url: '/events/:eventID',
-      templateUrl: 'templates/eventPage.html',
-      controller: 'eventPageCtrl'
-//      resolve: {
-//        eventID: function($stateParams, EventsService) {
-//          return EventsService.getEvent($stateParams.eventID); 
-//        }
-//      }
+      views: {
+        'eventsTab':{
+          templateUrl: 'templates/eventPage.html',
+          controller: 'eventPageCtrl'
+        }
+      }
     })
+      
+//    .state('eventPage', {
+//      url: '/tabs/events/:eventID',
+//      templateUrl: 'templates/eventPage.html',
+//      controller: 'eventPageCtrl'
+//    })
       
         
     .state('tabsController.createTabDefaultPage', {
