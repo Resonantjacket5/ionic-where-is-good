@@ -29,12 +29,6 @@ angular.module('app.routes', [])
       }
     })
       
-//    .state('eventPage', {
-//      url: '/tabs/events/:eventID',
-//      templateUrl: 'templates/eventPage.html',
-//      controller: 'eventPageCtrl'
-//    })
-      
         
     .state('tabsController.createTabDefaultPage', {
       url: '/create',
