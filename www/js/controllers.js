@@ -102,6 +102,8 @@ angular.module('app.controllers', ['ionic'])
 
   };
   
+  $scope.restaurant = EventService.fetchRestaurantText();
+  
   
 });
  
