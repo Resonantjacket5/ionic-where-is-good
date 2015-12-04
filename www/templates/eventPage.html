@@ -21,8 +21,9 @@
             <ion-item>Item 1</ion-item>
             <ion-item>Item 2</ion-item>
             <ion-item ng-repeat="preference in preferences">
-              <h2>{{preference.money}}</h2>
-              <p>{{preference.time}}</p>
+              <h2>{{preference.owner}}</h2>
+              <p>Money: {{preference.money}} dollars</p>
+              <p>Distance: {{preference.distance}} miles</p>
             </ion-item>
         </ion-list>
       

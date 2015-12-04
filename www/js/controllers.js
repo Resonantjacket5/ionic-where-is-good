@@ -6,22 +6,14 @@ angular.module('app.controllers', ['ionic'])
   $scope.events = [];
   $scope.events = EventsService.getEvents();
   
+  console.log("events tab reloaded");
+  
   $ionicModal.fromTemplateUrl('new-event.html',function(modal){
     $scope.eventModal = modal; 
   }, {
     scope: $scope,
     animation: 'slide-in-up'
   });
-  
-  $scope.hi = function() {
-    console.log("hi");
-  };
-  
-
-  
-//  $scope.createTask = function(task) {
-//    console.log(task.title); 
-//  }
   
   
   $scope.newEvent = function() {
@@ -72,6 +64,11 @@ angular.module('app.controllers', ['ionic'])
   
   
   EventService.loadPrefernces($scope.curEvent.preferences);
+  
+  //reloading preferences probably not the best way 
+  //heavily coupled to page lifecycle
+  //if this controller stops reloading either change set router.js for page
+  // to not cache. Or use ionicView when viewed function
   console.log("reload preferences");
   $scope.preferences = EventService.getPreferences();
   
@@ -99,8 +96,8 @@ angular.module('app.controllers', ['ionic'])
     
     //erase name and creator fields
     p_preference.owner ="";
-    p_preference.distance = 0;
-    p_preference.money = 0;
+    p_preference.distance = null;
+    p_preference.money = null;
     $scope.closeNewPreference();
 
   };
