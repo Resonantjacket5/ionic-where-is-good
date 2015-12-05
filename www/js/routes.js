@@ -33,7 +33,7 @@ angular.module('app.routes', [])
     .state('tabsController.createTabDefaultPage', {
       url: '/create',
       views: {
-        'tab3': {
+        'createTab': {
           templateUrl: 'templates/createTabDefaultPage.html',
           controller: 'createTabDefaultPageCtrl'
         }
@@ -45,8 +45,8 @@ angular.module('app.routes', [])
       
         
     .state('login', {
-      url: '/page1',
-      templateUrl: 'templates/login.html',
+      url: '/login',
+      templateUrl: 'login/login.html',
       controller: 'loginCtrl'
     })
         
@@ -65,7 +65,7 @@ angular.module('app.routes', [])
     .state('tabsController.joinTabDefaultPage', {
       url: '/join',
       views: {
-        'tab2': {
+        'joinTab': {
           templateUrl: 'templates/joinTabDefaultPage.html',
           controller: 'joinTabDefaultPageCtrl'
         }
@@ -82,6 +82,6 @@ angular.module('app.routes', [])
     ;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/page1');
+  $urlRouterProvider.otherwise('/login');
 
 });
