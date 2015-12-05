@@ -66,15 +66,11 @@ angular.module('app.routes', [])
       url: '/join',
       views: {
         'joinTab': {
-          templateUrl: 'templates/joinTabDefaultPage.html',
+          templateUrl: 'join/joinTabDefaultPage.html',
           controller: 'joinTabDefaultPageCtrl'
         }
       }
     })
-        
-      
-    
-      
         
 
         
