@@ -97,10 +97,13 @@ angular.module('app.services', [])
     }
   );
   
-  o.makeEvent = function(name,creator){
+  function makeEvent (name,creator,location){
+    
+    
     var tempEvent={
       name:name,
       creator:creator,
+      location:location,
       id:(o.lastID+1),
       preferences:[]
     };
@@ -134,7 +137,7 @@ angular.module('app.services', [])
     console.log("added event");
     //probably should have a event constructor, don't directly call 
     // upon the add the created event from controller
-    var event  = o.makeEvent(eventInfo.name,eventInfo.creator);
+    var event  = makeEvent(eventInfo.name,eventInfo.creator,eventInfo.location);
     o.events.push(event);
   };
   
@@ -142,6 +145,58 @@ angular.module('app.services', [])
 
   
   return o;
+}])
+
+
+/* 
+  With passed in Address, returns coordinates using
+  Googles API
+*/
+.factory('CoordinateService' , ['$http', function($http) {
+  var CoordinateService = {};
+  
+  //fetches coordinates from address
+  
+  //Example url call
+  //"https://maps.googleapis.com/maps/api/geocode/json?address=Nashville,+TN"
+  
+  var sampleaddress = "Nashville,+TN";
+  var mapurl = "https://maps.googleapis.com/maps/api/geocode/json";
+  var samplemapurl = mapurl + "?address="+sampleaddress;
+  //mapurl += "Washington,+DC";
+  
+  var lat = "";
+  var lng = "";
+  var coord = "";
+  
+  
+  CoordinateService.getCoordinates = function (address) {
+    if(address==null)
+    {
+      console.log("address empty");
+      address = sampleaddress;
+    }
+    console.log("called get coordinates");
+    //console.log(mapurl+" "+p_address);
+    console.log(mapurl);
+    return $http.get(mapurl,{
+      params: { address: address}
+    }).then(function (response) {
+      console.log(response);
+      lat = response.data.results[00]["geometry"]["location"].lat;
+      lng = response.data.results[00]["geometry"]["location"].lng;
+      console.log(lat);
+      console.log(lng);
+      coord = ""+lat+","+lng;
+      console.log("coord"+coord);
+      return coord;
+    }, function(error) {
+      console.log("error"+"getCoordinates failed");
+    });
+  };
+  
+  return CoordinateService;
+  
 }])
 
 .factory('RestaurantService', ['$http','$q', function($http, $q){
@@ -191,12 +246,11 @@ angular.module('app.services', [])
     }
     console.log("called gete coordinates");
     //console.log(mapurl+" "+p_address);
-    mapurl = samplemapurl;
+    //mapurl = samplemapurl;
     console.log(mapurl);
-    $http.get(mapurl
-              //,{
-      //params: { address: p_address}}
-      ).then(function (response) {
+    $http.get(mapurl,{
+      params: { address: p_address}
+    }).then(function (response) {
       console.log(response);
       lat = response.data.results[00]["geometry"]["location"].lat;
       lng = response.data.results[00]["geometry"]["location"].lng;
