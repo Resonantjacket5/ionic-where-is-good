@@ -38,8 +38,10 @@ angular.module('app.controllers', ['ionic'])
   
 })
    
-.controller('createTabDefaultPageCtrl', function($scope) {
-
+.controller('createTabDefaultPageCtrl', function($scope, RestaurantService, $http) {
+  $scope.coordtext  = RestaurantService.getCoordinates("Washington, DC");
+  console.log($scope.coordtext);
+  //console.log("another "+$http.get("https://maps.googleapis.com/maps/api/geocode/json?address=Nashville,+TN").data.results);
 })
    
 .controller('loginCtrl', function($scope) {
@@ -51,8 +53,6 @@ angular.module('app.controllers', ['ionic'])
 })
    
 .controller('eventPageCtrl', function($stateParams, $ionicModal, $scope, EventService, EventsService) {
-  
-  
   
   
   //passes in string of eventID

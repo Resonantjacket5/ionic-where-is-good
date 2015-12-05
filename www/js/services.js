@@ -47,14 +47,19 @@ angular.module('app.services', [])
     console.log("try fetch restaurant");
     var restaurant = {};
     //restaurant.text = "restaurant " + RestaurantService.makeCORSRequest();
-    var foodText = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=36.1215,%20-115.1739&keyword=%22+cuisine+%22&minprice=%22+minprice+%22&maxprice=%22+maxprice+%22&rankby=distance&types=food&key=AIzaSyB8sCjeWMHJcCqvHNA0CknuFgXfJ80BKg0";
-    $http.get(foodText).then(function(response){
-      restaurant.text=response;
-    }, function (error){
-      console.error('ERR', error);
-    })
+    restaurant.text  = "restaurant " + RestaurantService.simpleCORSRequest();
     return restaurant;
   };
+  
+//  {
+//    var foodText = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=36.1215,%20-115.1739&keyword=%22+cuisine+%22&minprice=%22+minprice+%22&maxprice=%22+maxprice+%22&rankby=distance&types=food&key=AIzaSyB8sCjeWMHJcCqvHNA0CknuFgXfJ80BKg0";
+//    $http.get(foodText).then(function(response){
+//      restaurant.text=response;
+//    }, function (error){
+//      console.error('ERR', error);
+//    })
+//    return restaurant;
+//  }
   
   return o;
 }])
@@ -73,6 +78,7 @@ angular.module('app.services', [])
     {  
       name:"event 4b",
       creator:"Jackson",
+      location: "Nashville, TN",
       id:0,
       preferences: []
     }
@@ -81,6 +87,7 @@ angular.module('app.services', [])
     {  
       name:"event 7",
       creator:"sam",
+      location: "Los Angeles, CA",
       id:7,
       preferences:[]
     }
@@ -133,7 +140,9 @@ angular.module('app.services', [])
   return o;
 }])
 
-.factory('RestaurantService', [function($http){
+.factory('RestaurantService', ['$http', function($http){
+  
+  var o = {};
   
   // below creates the  CORS Request
   // from html5rocks.com/en/tutorials/cors/ by Monsur Hossain
@@ -157,22 +166,41 @@ angular.module('app.services', [])
   
   
   //fetches coordinates from address
-  var address = "";
-  var mapurl = "https://maps.googleapis.com/maps/api/geocode/json?address=";
-  mapurl += "Nashville,+TN";
+  
+  //Example url call
+  //"https://maps.googleapis.com/maps/api/geocode/json?address=Nashville,+TN"
+  
+  var sampleaddress = "Nashville,+TN";
+  var mapurl = "https://maps.googleapis.com/maps/api/geocode/json";
+  var samplemapurl = mapurl + "?address="+sampleaddress;
   //mapurl += "Washington,+DC";
-  mapurl += address;
   
   var lat = "";
   var lng = "";
   var coord = "";
   
-  function getCoordinates(){
-    $http.get(mapurl).then(function (response) {
-      var mapJSON = JSON.parse(response);
-      lat = mapJSON.results[00]["geometry"]["location"].lat;
-      lng = mapJSON.results[00]["geometry"]["location"].lng;
-      coord = lat+lng;
+  
+  o.getCoordinates = function (p_address) {
+    if(p_address==null)
+    {
+      p_address = sampleaddress;
+    }
+    console.log("called gete coordinates");
+    //console.log(mapurl+" "+p_address);
+    mapurl = samplemapurl;
+    console.log(mapurl);
+    $http.get(mapurl
+              //,{
+      //params: { address: p_address}}
+      ).then(function (response) {
+      console.log(response);
+      lat = response.data.results[00]["geometry"]["location"].lat;
+      lng = response.data.results[00]["geometry"]["location"].lng;
+      console.log(lat);
+      console.log(lng);
+      coord = ""+lat+""+lng;
+      console.log("coord"+coord);
+      return coord;
     }, function(error) {
       console.log("error"+"getCoordinates failed");
     });
@@ -182,16 +210,18 @@ angular.module('app.services', [])
   // code from old hackathon project (CORS caller credit to cathy and haibo) https://github.com/Resonantjacket5/WhereIsGood/blob/master/WhereIsGood/Views/Shared/_GroupRestaurant.cshtml 
   var testURL =  "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=36.1215,%20-115.1739&keyword=%22+cuisine+%22&minprice=%22+minprice+%22&maxprice=%22+maxprice+%22&rankby=distance&types=food&key=AIzaSyB8sCjeWMHJcCqvHNA0CknuFgXfJ80BKg0";
   
-  var weburl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=";
+  var weburl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+  
+  //?=location
   
   //nashville coordinates
-  var sampleCoord = "36.16,%20-86.783";
+  var sampleCoord = "36.16,-86.783";
   var key = "AIzaSyB8sCjeWMHJcCqvHNA0CknuFgXfJ80BKg0";
   var cuisine = "none selected";
   var distance = 0;
   var outputJSON = null;
   
-  var o = {}; 
+   
 
   
   
@@ -235,14 +265,19 @@ angular.module('app.services', [])
   o.simpleCORSRequest = function (preferences) {
     
     var firstRestaurantName = "";
-    var temporaryJSON;
-    
-    
-    $http.get(foodText).then(function(response){
-      temporaryJSON = JSON.parse(response);
-      
+     
+    $http.get(weburl, {
+    params:{
+        location: sampleCoord,
+        rankby: "distance",
+        types: "food",
+        key: key
+      }
+    }).then(function(response){
       //return the first restaurants name only
-      return temporaryJSON.results[00].name;
+      console.log(response.data);
+      console.log(response.data.results[00].name);
+      return response.data.results[00].name;
       
     }, function (error){
       console.error('ERR', error);
