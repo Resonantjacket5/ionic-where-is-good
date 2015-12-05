@@ -42,13 +42,17 @@ angular.module('app.services', [])
   o.addPreference = function(preference){
     o.preferences.push(preference);
   };
-  
+   
   o.fetchRestaurantText = function() {
     console.log("try fetch restaurant");
-    var restaurant = {};
+    //var restaurant = {}; 
     //restaurant.text = "restaurant " + RestaurantService.makeCORSRequest();
-    restaurant.text  = "restaurant " + RestaurantService.simpleCORSRequest();
-    return restaurant;
+    return RestaurantService.simpleCORSRequest();
+      
+//      .then(function (result) {
+//      restaurant.text  = "restaurant " + result;
+//      return restaurant;
+//    }); 
   };
   
 //  {
@@ -140,7 +144,7 @@ angular.module('app.services', [])
   return o;
 }])
 
-.factory('RestaurantService', ['$http', function($http){
+.factory('RestaurantService', ['$http','$q', function($http, $q){
   
   var o = {};
   
@@ -265,8 +269,10 @@ angular.module('app.services', [])
   o.simpleCORSRequest = function (preferences) {
     
     var firstRestaurantName = "";
-     
-    $http.get(weburl, {
+    
+//    var deferred = $q.defer();
+    
+    return $http.get(weburl, {
     params:{
         location: sampleCoord,
         rankby: "distance",
@@ -278,9 +284,12 @@ angular.module('app.services', [])
       console.log(response.data);
       console.log(response.data.results[00].name);
       return response.data.results[00].name;
+//      deferred.resolve(response.data.results[00].name);
+//      return defered.promise; 
       
     }, function (error){
       console.error('ERR', error);
+      throw new Error("SimpleCORSRequest failed");
     })
   };
   

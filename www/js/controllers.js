@@ -97,13 +97,18 @@ angular.module('app.controllers', ['ionic'])
     //erase name and creator fields
     p_preference.owner ="";
     p_preference.distance = null;
-    p_preference.money = null;
+    p_preference.money = null; 
     $scope.closeNewPreference();
 
   };
   
-  $scope.restaurant = EventService.fetchRestaurantText();
+  $scope.restaurant = {};
   
+  console.log(EventService.fetchRestaurantText());
   
+  EventService.fetchRestaurantText().then( function (response)
+  {
+    $scope.restaurant.text = response;
+  });
 });
  
