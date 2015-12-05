@@ -34,7 +34,7 @@ angular.module('app.routes', [])
       url: '/create',
       views: {
         'createTab': {
-          templateUrl: 'templates/createTabDefaultPage.html',
+          templateUrl: '/create/createTabDefaultPage.html',
           controller: 'createTabDefaultPageCtrl'
         }
       }
