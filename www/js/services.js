@@ -224,47 +224,6 @@ angular.module('app.services', [])
   
   
   
-  //fetches coordinates from address
-  
-  //Example url call
-  //"https://maps.googleapis.com/maps/api/geocode/json?address=Nashville,+TN"
-  
-  var sampleaddress = "Nashville,+TN";
-  var mapurl = "https://maps.googleapis.com/maps/api/geocode/json";
-  var samplemapurl = mapurl + "?address="+sampleaddress;
-  //mapurl += "Washington,+DC";
-  
-  var lat = "";
-  var lng = "";
-  var coord = "";
-  
-  
-  o.getCoordinates = function (p_address) {
-    if(p_address==null)
-    {
-      p_address = sampleaddress;
-    }
-    console.log("called gete coordinates");
-    //console.log(mapurl+" "+p_address);
-    //mapurl = samplemapurl;
-    console.log(mapurl);
-    $http.get(mapurl,{
-      params: { address: p_address}
-    }).then(function (response) {
-      console.log(response);
-      lat = response.data.results[00]["geometry"]["location"].lat;
-      lng = response.data.results[00]["geometry"]["location"].lng;
-      console.log(lat);
-      console.log(lng);
-      coord = ""+lat+""+lng;
-      console.log("coord"+coord);
-      return coord;
-    }, function(error) {
-      console.log("error"+"getCoordinates failed");
-    });
-  };
-  
-  
   // code from old hackathon project (CORS caller credit to cathy and haibo) https://github.com/Resonantjacket5/WhereIsGood/blob/master/WhereIsGood/Views/Shared/_GroupRestaurant.cshtml 
   var testURL =  "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=36.1215,%20-115.1739&keyword=%22+cuisine+%22&minprice=%22+minprice+%22&maxprice=%22+maxprice+%22&rankby=distance&types=food&key=AIzaSyB8sCjeWMHJcCqvHNA0CknuFgXfJ80BKg0";
   
