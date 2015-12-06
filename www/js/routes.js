@@ -14,7 +14,7 @@ angular.module('app.routes', [])
       url: '/events',
       views: {
         'eventsTab': {
-          templateUrl: '/events/eventsTabDefaultPage.html',
+          templateUrl: 'events/eventsTabDefaultPage.html',
           controller: 'eventsTabDefaultPageCtrl'
         }
       }
@@ -23,7 +23,7 @@ angular.module('app.routes', [])
       url: '/events/:eventID',
       views: {
         'eventsTab':{
-          templateUrl: '/events/eventPage.html',
+          templateUrl: 'events/eventPage.html',
           controller: 'eventPageCtrl'
         }
       }
@@ -34,7 +34,7 @@ angular.module('app.routes', [])
       url: '/create',
       views: {
         'createTab': {
-          templateUrl: '/create/createTabDefaultPage.html',
+          templateUrl: 'create/createTabDefaultPage.html',
           controller: 'createTabDefaultPageCtrl'
         }
       }
