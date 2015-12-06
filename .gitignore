@@ -4,3 +4,12 @@
 node_modules/
 platforms/
 plugins/
+
+.sass-cache
+www/lib
+platforms
+plugins
+*.swp
+*.swo
+*.log
+*.DS_Store
