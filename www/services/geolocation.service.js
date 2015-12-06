@@ -16,7 +16,10 @@ angular.module('app.services')
     }, function(error) {
       console.log("geolocation fetch failed");
       q.reject(error);
-    }/*,options*/);
+    },{
+      enableHighAccuracy: true,
+      timeout: 10000
+    });
     
     return q.promise;
   };
