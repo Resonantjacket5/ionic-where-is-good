@@ -4,6 +4,7 @@ angular.module('app.controllers')
   
   //passes in string of eventID
   $scope.curEvent = EventsService.getEvent($stateParams.eventID);
+  $scope.eventID = $stateParams.eventID;
   
   //debugging
   console.log("event page"); 
