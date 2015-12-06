@@ -56,7 +56,8 @@ angular.module('app.controllers')
   $scope.askSuggestion = function () {
     EventService.fetchRestaurantText().then( function (response)
     {
-      $scope.restaurant.text = response;
+      //$scope.restaurant.text = response;
+      $scope.restaurants = response.results;
     });
   };
   

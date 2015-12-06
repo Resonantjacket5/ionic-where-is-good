@@ -39,7 +39,8 @@ angular.module('app.services')
       var status = response.data.status;
       
       if(status=="OK")
-        return response.data.results[00].name;
+        return response.data;
+        //return response.data.results[00].name;
       else if(status="ZERO_RESULTS")
         return "No nearby restaurants found";
       else if(status="INVALID_REQUEST")
