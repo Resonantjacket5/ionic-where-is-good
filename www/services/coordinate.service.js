@@ -33,6 +33,7 @@ angular.module('app.services')
     console.log("called get coordinates");
     //console.log(mapurl+" "+p_address);
     console.log(mapurl);
+    
     return $http.get(mapurl,{
       params: { address: address}
     }).then(function (response) {

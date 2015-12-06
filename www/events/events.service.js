@@ -1,6 +1,7 @@
+"use strict";
 angular.module('app.services')
 
-.factory('EventsService', [function(){
+.factory('EventsService', ['CoordinateService',function(CoordinateService){
   
   //array of events that user attains
   var o = {
@@ -21,7 +22,8 @@ angular.module('app.services')
     {  
       name:"event 7",
       creator:"sam",
-      location: "Los Angeles, CA",
+      location: "New York, NY",
+      coordinates: "40.7127,-74.0059",
       id:7,
       preferences:[]
     }
@@ -29,15 +31,23 @@ angular.module('app.services')
   
   function makeEvent (name,creator,location){
     
-    
     var tempEvent={
       name:name,
       creator:creator,
       location:location,
+      coordinates: "not found",
       id:(o.lastID+1),
       preferences:[]
     };
+    
     o.lastID+=1;
+    
+    CoordinateService.getCoordinates(location).then(
+      function(response){
+        tempEvent.coordinates = response;
+      });
+
+    
     return tempEvent;
   };
   
@@ -49,10 +59,9 @@ angular.module('app.services')
   
   o.getEvent = function(eventID) {
     
-//    console.log("array size "+o.events.length);
-//    console.log("eventid "+eventID);
     
-    for (var index = 0; index<(o.events.length); index+=1)
+    //must "use strict" to use let
+    for (let index = 0; index<(o.events.length); index+=1)
     {  
       var event = o.events[index];
       if(event.id == eventID)
@@ -70,8 +79,6 @@ angular.module('app.services')
     var event  = makeEvent(eventInfo.name,eventInfo.creator,eventInfo.location);
     o.events.push(event);
   };
-  
-  // return $http.get("url/users")
 
   
   return o;

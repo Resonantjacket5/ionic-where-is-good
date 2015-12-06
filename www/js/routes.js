@@ -39,7 +39,6 @@ angular.module('app.routes', [])
         }
       }
     })
-        
       
     
       
@@ -56,11 +55,8 @@ angular.module('app.routes', [])
     .state('tabsController', {
       url: '/tabs',
       abstract:true,
-      templateUrl: 'templates/tabsController.html'
+      templateUrl: 'layout/tabsController.html'
     })
-      
-    
-      
         
     .state('tabsController.joinTabDefaultPage', {
       url: '/join',

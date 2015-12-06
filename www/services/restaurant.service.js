@@ -23,10 +23,10 @@ angular.module('app.services')
   o.simpleCORSRequest = function (preferences) {
     
     var firstRestaurantName = "";
-    
+    console.log(weburl+preferences.coordinates);
     return $http.get(weburl, {
     params:{
-        location: sampleCoord,
+        location: preferences.coordinates,
         rankby: "distance",
         types: "food",
         key: key
@@ -35,10 +35,18 @@ angular.module('app.services')
       //return the first restaurants name only
       console.log(response.data);
       console.log(response.data.results[00].name);
-      return response.data.results[00].name;
+      
+      var status = response.data.status;
+      
+      if(status=="OK")
+        return response.data.results[00].name;
+      else if(status="ZERO_RESULTS")
+        return "No nearby restaurants found";
+      else if(status="INVALID_REQUEST")
+        return "Invalid request made";
 //      deferred.resolve(response.data.results[00].name);
 //      return defered.promise; 
-      
+       
     }, function (error){
       console.error('ERR', error);
       throw new Error("SimpleCORSRequest failed");

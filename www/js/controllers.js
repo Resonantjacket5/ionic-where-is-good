@@ -1,3 +1,4 @@
 /*global angular */
 
-angular.module('app.controllers', ['ionic']);
+//deprecated and moved to app.js
+//angular.module('app.controllers', ['ionic']);

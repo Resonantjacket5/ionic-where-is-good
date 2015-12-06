@@ -13,6 +13,7 @@
         <h1>{{curEvent.name}}</h1>
         <p>Creator: {{curEvent.creator}}</p>
         <p>Location: {{curEvent.location}}</p>
+        <p>Coordinates: {{curEvent.coordinates}}</p>
         <div>
             <p>Some friendly
                 <strong>markdown</strong> Event description and other stuff. lol.</p>
@@ -27,6 +28,9 @@
               <p>Distance: {{preference.distance}} miles</p>
             </ion-item>
         </ion-list> 
+      
+        <button class="button button-calm" ng-click="askSuggestion()">Ask Suggestion</button>
+      
         Restaurant: {{restaurant.text}} 
       
       <script id="new-preference.html" type="text/ng-template">
@@ -52,7 +56,7 @@
                   <label class="item item-input">
                     <input type="number" ng-model="preference.money" placeholder="Money">
                   </label>
-                  <button type="submit" class="button button-block button-positive">Create Event</button>
+                  <button type="submit" class="button button-block button-positive">Create Preference</button>
                 </div>
               </form>
             </ion-content>

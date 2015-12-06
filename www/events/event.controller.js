@@ -10,7 +10,7 @@ angular.module('app.controllers')
   console.log($scope.curEvent.name);
   
   
-  EventService.loadPrefernces($scope.curEvent.preferences);
+  EventService.loadPrefernces($scope.curEvent,$scope.curEvent.preferences);
   
   //reloading preferences probably not the best way 
   //heavily coupled to page lifecycle
@@ -51,10 +51,13 @@ angular.module('app.controllers')
   
   $scope.restaurant = {};
   
-  console.log(EventService.fetchRestaurantText());
+  //console.log(EventService.fetchRestaurantText());
   
-  EventService.fetchRestaurantText().then( function (response)
-  {
-    $scope.restaurant.text = response;
-  });
+  $scope.askSuggestion = function () {
+    EventService.fetchRestaurantText().then( function (response)
+    {
+      $scope.restaurant.text = response;
+    });
+  };
+  
 });

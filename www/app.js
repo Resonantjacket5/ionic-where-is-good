@@ -19,4 +19,15 @@ angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.services',
       StatusBar.styleDefault();
     }
   });
-})
+});
+
+//moved from js/services.js
+angular.module('app.services', []);
+
+//moved from js/controller.js
+
+/*global angular */
+angular.module('app.controllers', ['ionic']);
+
+//moved from js/directives.js
+angular.module('app.directives', []);
